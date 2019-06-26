@@ -1,7 +1,8 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Button, Image } from '@tarojs/components'
+import { View, Text, Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { showDrawer } from '../../actions/menu'
+import { showDrawerAction, hideDrawerAction, changeCategoryAction } from '../../actions/menu'
+import { AtDrawer } from 'taro-ui'
 import './menu.less'
 
 @connect(function(store) {
@@ -9,22 +10,39 @@ import './menu.less'
 }, dispatch => {
   return {
     showDrawerMenu() {
-      dispatch(showDrawer())
+      dispatch(showDrawerAction())
+    },
+    hdieDrawerMenu() {
+      dispatch(hideDrawerAction())
+    },
+    changeCategory(handleCata) {
+      dispatch(changeCategoryAction(handleCata))
     }
   }
 })
 class Menu extends Component{
-  showDrawer() {
-    const { showDrawerMenu } = this.props;
-    showDrawerMenu && showDrawerMenu();
+  getItems(cataData) {
+    return cataData.map(item => item.value)
+  }
+  handleCatagry(index) {
+    const { cataData, currentCata, changeCategory } = this.props;
+    const handleCata = cataData[index];
+    if (handleCata.key !== currentCata.key) {
+      changeCategory(handleCata)
+    }
   }
   render() {
-    const { currentCata: { value } } = this.props;
-    return (<View className='topiclist-menu'>
-      <Image className='image' onClick={this.showDrawer.bind(this)} src={require('../../assets/img/cata.png')} />
-      <Text>{value ? value : ''}</Text>
-      <Image className='image' src={require('../../assets/img/login.png')} />
-    </View>)
+    const { currentCata: { value }, showDrawer, showDrawerMenu, hdieDrawerMenu, cataData } = this.props;
+    return (
+    <View>
+      <AtDrawer style='position: absolute;' onItemClick={this.handleCatagry.bind(this)} onClose={hdieDrawerMenu} show={showDrawer} items={this.getItems(cataData)} />
+      <View className='topiclist-menu'>
+        <Image className='image' onClick={showDrawerMenu} src={require('../../assets/img/cata.png')} />
+        <Text>{value ? value : ''}</Text>
+        <Image className='image' src={require('../../assets/img/login.png')} />
+      </View>
+    </View>
+    )
   }
 }
 export default Menu
