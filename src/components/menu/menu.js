@@ -34,7 +34,7 @@ class Menu extends Component{
   render() {
     const { currentCata: { value }, showDrawer, showDrawerMenu, hdieDrawerMenu, cataData } = this.props;
     return (
-    <View>
+    <View className='menu-box'>
       <AtDrawer style='position: absolute;' onItemClick={this.handleCatagry.bind(this)} onClose={hdieDrawerMenu} show={showDrawer} items={this.getItems(cataData)} />
       <View className='topiclist-menu'>
         <Image className='image' onClick={showDrawerMenu} src={require('../../assets/img/cata.png')} />

@@ -1,0 +1,50 @@
+.topiclist-topic{
+  display: flex;
+  flex-direction: row;
+  margin: 10PX;
+  padding: 0 10PX;
+  .head-img{
+    width: 30PX;
+    min-width: 30PX;
+    height: 30PX;
+    border-radius: 50%;
+    margin-right: 10PX;
+  }
+  .right{
+    flex-grow: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    .topic-title, .topic-info{
+      display: flex;
+      align-items: baseline;
+      width: 100%;
+    }
+    .topic-title{
+      margin-bottom: 10PX;
+      display: flex;
+      .topic-up{
+        padding: 2PX 5PX;
+        display: inline-block;
+        background-color: #f48fb1;
+        color: #fff;
+        text-align: center;
+        margin-right: 5PX;
+        font-size: 12PX;
+        border-radius: 4PX;
+      }
+      .topic-name{
+        flex-grow: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+    .topic-info{
+      color: #757575;
+      font-size: 12PX;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
