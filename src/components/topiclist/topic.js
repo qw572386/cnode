@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
+import timeToLocalFormat from '../../utils/date'
 import './topic.less'
 
 class Topic extends Component{
@@ -16,7 +17,7 @@ class Topic extends Component{
         <View className='topic-info'>
           <Text>{loginname}</Text>
           <Text>{reply_count + '/' + visit_count}</Text>
-          <Text>创建时间:{create_at}</Text>
+          <Text>创建时间:{timeToLocalFormat(create_at)}</Text>
         </View>
       </View>
     </View>)

@@ -11,3 +11,15 @@ export const getTopicListAction = (params) => {
     }
   }
 }
+export const getNextTopicListAction = (params) => {
+  return async dispatch => {
+    let result = await getJson(api.topics, params);
+    if (result && result.data) {
+      if (result.data.success) {
+        if (result.data.data.length) {
+          dispatch({ type: 'appendTopicList', list: result.data.data, page: params.page })
+        }
+      }
+    }
+  }
+}

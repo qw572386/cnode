@@ -8,6 +8,9 @@ const topicList = (preState = TOPIC_STATE, action) => {
     case 'getTopicList': {
       return { ...preState, list: action.list }
     }
+    case 'appendTopicList': {
+      return { ...preState, list: [...preState.list, ...action.list], page: action.page }
+    }
     default: {
       return {...preState}
     }
