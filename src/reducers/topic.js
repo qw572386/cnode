@@ -6,7 +6,7 @@ const TOPIC_STATE = {
 const topicList = (preState = TOPIC_STATE, action) => {
   switch(action.type) {
     case 'getTopicList': {
-      return { ...preState, list: action.list }
+      return { ...preState, list: action.list, page: 1 }
     }
     case 'appendTopicList': {
       return { ...preState, list: [...preState.list, ...action.list], page: action.page }
