@@ -18,6 +18,9 @@ import TopicInfo from '../../components/topicinfo/topicinfo'
   }
 })
 class Detail extends Component{
+  config = {
+    navigationBarTitleText: '话题详情'
+  }
   componentWillMount() {
     const { getTopicInfo } = this.props;
     const params = {

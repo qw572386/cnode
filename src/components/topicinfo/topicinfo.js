@@ -7,12 +7,12 @@ import './topicinfo.less'
 class TopicInfo extends Component{
   render() {
     console.log(this.props)
-    const { topicinfo: { create_at, title, author: { loginname }, visit_count, content } } = this.props;
+    const { topicinfo: { create_at, title, author: { loginname }, visit_count, content, top, tab } } = this.props;
     return (
     <View className='topic-info'>
       <View className='topic-info-header'>
         <View className='topic-info-header-title'>
-          <Text>置顶</Text>
+        {top ? <Text className='topic-up'>置顶</Text> : (tab === 'share' ? <Text className='topic-up blue'>分享</Text> : <Text className='topic-up blue'>问答</Text>) }
           <Text>{title}</Text>
         </View>
         <View className='topic-info-header-pie'>
@@ -26,6 +26,11 @@ class TopicInfo extends Component{
       </View>
     </View>
     )
+  }
+}
+TopicInfo.defaultProps = {
+  topicinfo: {
+    author: {}
   }
 }
 export default TopicInfo

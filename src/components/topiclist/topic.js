@@ -27,4 +27,9 @@ class Topic extends Component{
     </View>)
   }
 }
+Topic.defaultProps = {
+  item: {
+    author: {}
+  }
+}
 export default Topic

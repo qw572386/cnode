@@ -1,0 +1,33 @@
+.topicinfo-repliy{
+  display: flex;
+  font-size: 14PX;
+  width: 100%;
+  margin: 20PX 0;
+  padding: 0 10PX;
+  &-image{
+    width: 30PX;
+    min-width: 30PX;
+    height: 30PX;
+    border-radius: 50%;
+  }
+  &-right{
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    &-body{
+      display: flex;
+      flex-direction: column;
+      padding: 0 10PX;
+      .topicinfo-repliy-right-pie{
+        margin-bottom: 5PX;
+      }
+    }
+    &-zan{
+      display: flex;
+      .topicinfo-repliy-image{
+        width: 26PX;
+        height: 26PX;
+      }
+    }
+  }
+}

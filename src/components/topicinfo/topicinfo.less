@@ -2,6 +2,7 @@
   font-size: 14PX;
   display: flex;
   flex-direction: column;
+  padding: 0 10PX;
   &-header{
     display: flex;
     flex-direction: column;
@@ -11,7 +12,26 @@
       font-size: 12PX;
       color: #757575;
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
+    }
+    &-title{
+      margin-bottom: 5PX;
+      display: flex;
+      align-items: baseline;
+      .topic-up{
+        padding: 2PX 5PX;
+        display: inline-block;
+        background-color: #f48fb1;
+        color: #fff;
+        text-align: center;
+        margin-right: 5PX;
+        font-size: 13PX;
+        border-radius: 4PX;
+        white-space: nowrap;
+        &.blue{
+          background-color: #03a9f4;
+        }
+      }
     }
   }
 }
