@@ -1,10 +1,15 @@
 const TOPIC_STATE = {
   page: 1,
   limit: 20,
-  list: []
+  list: [],
+  topicinfo: {},
+  replies: []
 }
 const topicList = (preState = TOPIC_STATE, action) => {
   switch(action.type) {
+    case 'getTopicInfo': {
+      return { ...preState, replies: action.infoData.replies, topicinfo: { ...action.infoData, replies: null } }
+    }
     case 'getTopicList': {
       return { ...preState, list: action.list, page: 1 }
     }

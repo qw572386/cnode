@@ -23,3 +23,14 @@ export const getNextTopicListAction = (params) => {
     }
   }
 }
+// 请求话题详情
+export const getTopicInfoAction = (params) => {
+  return async dispatch => {
+    const result = await getJson(api.gettopicsinfo + '/' + params.id, params)
+    if (result && result.data && result.data.success) {
+      dispatch({ type: 'getTopicInfo', infoData: result.data.data })
+    } else {
+      console.error('请求详情失败')
+    }
+  }
+}

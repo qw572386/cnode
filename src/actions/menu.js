@@ -1,4 +1,5 @@
 import { getTopicListAction } from './topiclist'
+
 export function showDrawerAction() {
   return function (dispatch) {
     dispatch({type: 'showDrawer'})
