@@ -3,10 +3,14 @@ const TOPIC_STATE = {
   limit: 20,
   list: [],
   topicinfo: {},
-  replies: []
+  replies: [],
+  admireState: false // 点赞状态
 }
 const topicList = (preState = TOPIC_STATE, action) => {
   switch(action.type) {
+    case 'admireSuccess': {
+      return { ...preState, admireState: !preState.admireState }
+    }
     case 'getTopicInfo': {
       return { ...preState, replies: action.infoData.replies, topicinfo: { ...action.infoData, replies: null } }
     }

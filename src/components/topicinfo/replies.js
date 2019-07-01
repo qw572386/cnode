@@ -7,6 +7,9 @@ import timeToLocalFormat from '../../utils/date'
 // const isweapp = process.env.TARO_NAV === 'weapp' // 小程序环境
 const isweapp = true // 小程序环境
 class Replies extends Component{
+  admire(repliy) {
+    this.props.onAdmire && this.props.onAdmire(repliy)
+  }
   render() {
     const { replies } = this.props;
     return (
@@ -29,9 +32,9 @@ class Replies extends Component{
                   </View>
                 </View>
                 <View className='topicinfo-repliy-right-zan'>
-                  <Image className='topicinfo-repliy-image' src={require('../../assets/img/zan.png')} />
-                  <Text>0</Text>
-                  <Image className='topicinfo-repliy-image' src={require('../../assets/img/zhuan.png')} />
+                  <Image className='topicinfo-repliy-image' src={item.is_uped ? require('../../assets/img/myzan.png') : require('../../assets/img/zan.png')} />
+                  <Text>{item.ups.length}</Text>
+                  <Image onClik={this.admire.bind(this, item)} className='topicinfo-repliy-image' src={require('../../assets/img/zhuan.png')} />
                   <Text>0</Text>
                 </View>
               </View>

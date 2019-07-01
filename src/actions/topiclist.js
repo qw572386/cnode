@@ -1,5 +1,6 @@
 import { getJson, postJson } from '../utils/require'
 import api from '../constants/api'
+import Taro from '@tarojs/taro'
 
 export const getTopicListAction = (params) => {
   return async dispatch => {
@@ -31,6 +32,17 @@ export const getTopicInfoAction = (params) => {
       dispatch({ type: 'getTopicInfo', infoData: result.data.data })
     } else {
       console.error('请求详情失败')
+    }
+  }
+}
+// 点赞话题回复
+export const admireTopicAction = (params) => {
+  return async dispatch => {
+    const result = await postJson(api.upreply + '/' + params.replyid + '/ups', params)
+    if (result && result.data && result.data.success) {
+      dispatch({ type: 'admireSuccess' })
+    } else {
+      Taro.showToast({title: '点赞失败', icon: 'none'})
     }
   }
 }
