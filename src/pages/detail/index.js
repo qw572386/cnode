@@ -35,6 +35,7 @@ class Detail extends Component{
       replyid: repliy.id,
       accesstoken,
     }
+    console.log(params)
     admireTopic && admireTopic(params)
   }
   getDetail() {

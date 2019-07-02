@@ -38,7 +38,7 @@ export const getTopicInfoAction = (params) => {
 // 点赞话题回复
 export const admireTopicAction = (params) => {
   return async dispatch => {
-    const result = await postJson(api.upreply + '/' + params.replyid + '/ups', params)
+    const result = await postJson(api.upreply + params.replyid + '/ups', params)
     if (result && result.data && result.data.success) {
       dispatch({ type: 'admireSuccess' })
     } else {

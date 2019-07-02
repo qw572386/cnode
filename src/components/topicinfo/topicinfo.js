@@ -6,7 +6,6 @@ import './topicinfo.less'
 
 class TopicInfo extends Component{
   render() {
-    console.log(this.props)
     const { topicinfo: { create_at, title, author: { loginname }, visit_count, content, top, tab } } = this.props;
     return (
     <View className='topic-info'>
@@ -30,7 +29,9 @@ class TopicInfo extends Component{
 }
 TopicInfo.defaultProps = {
   topicinfo: {
-    author: {}
+    author: {
+      loginname: ''
+    }
   }
 }
 export default TopicInfo

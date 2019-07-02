@@ -32,9 +32,9 @@ class Replies extends Component{
                   </View>
                 </View>
                 <View className='topicinfo-repliy-right-zan'>
-                  <Image className='topicinfo-repliy-image' src={item.is_uped ? require('../../assets/img/myzan.png') : require('../../assets/img/zan.png')} />
+                  <Image onClick={this.admire.bind(this, item)} className='topicinfo-repliy-image' src={item.is_uped ? require('../../assets/img/myzan.png') : require('../../assets/img/zan.png')} />
                   <Text>{item.ups.length}</Text>
-                  <Image onClik={this.admire.bind(this, item)} className='topicinfo-repliy-image' src={require('../../assets/img/zhuan.png')} />
+                  <Image className='topicinfo-repliy-image' src={require('../../assets/img/zhuan.png')} />
                   <Text>0</Text>
                 </View>
               </View>
@@ -44,5 +44,8 @@ class Replies extends Component{
       </View>
     )
   }
+}
+Replies.defaultProps = {
+  replies: []
 }
 export default Replies
