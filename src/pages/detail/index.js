@@ -1,9 +1,11 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Button } from '@tarojs/components'
+import { View, Button } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { getTopicInfoAction, admireTopicAction } from '../../actions/topiclist'
 import Replies from '../../components/topicinfo/replies'
 import TopicInfo from '../../components/topicinfo/topicinfo'
+import ReplyContent from '../../components/topicinfo/replycontent'
+import './index.less'
 
 @connect((store) => {
   return {
@@ -26,6 +28,9 @@ class Detail extends Component{
   config = {
     navigationBarTitleText: '话题详情'
   }
+  state = {
+    showReplyContent: false // 显示回复组件
+  }
   componentWillMount() {
     this.getDetail()
   }
@@ -35,7 +40,6 @@ class Detail extends Component{
       replyid: repliy.id,
       accesstoken,
     }
-    console.log(params)
     admireTopic && admireTopic(params)
   }
   getDetail() {
@@ -52,12 +56,24 @@ class Detail extends Component{
       this.getDetail();
     }
   }
+  Reply() {
+    this.setState({showReplyContent: true});
+  }
+  closeReplyContent() {
+    this.setState({showReplyContent: false})
+  }
+  relyContent(content) {
+    console.log(content)
+  }
   render() {
     const { topicinfo, replies } = this.props;
+    const { showReplyContent } = this.state;
     return (
-      <View>
+      <View className='detail'>
+        {showReplyContent ? <ReplyContent onCancelReply={this.closeReplyContent.bind(this)} onRely={this.relyContent.bind(this)} /> : null}
         <TopicInfo topicinfo={topicinfo} />
         <Replies replies={replies} onAdmire={this.admire.bind(this)} />
+        <Button className='reply-btn' onClick={this.Reply.bind(this)}>回复</Button>
       </View>
     )
   }
