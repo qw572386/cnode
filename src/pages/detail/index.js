@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Button } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { getTopicInfoAction, admireTopicAction } from '../../actions/topiclist'
+import { getTopicInfoAction, admireTopicAction, replyContentAction } from '../../actions/topiclist'
 import Replies from '../../components/topicinfo/replies'
 import TopicInfo from '../../components/topicinfo/topicinfo'
 import ReplyContent from '../../components/topicinfo/replycontent'
@@ -62,17 +62,33 @@ class Detail extends Component{
   closeReplyContent() {
     this.setState({showReplyContent: false})
   }
-  relyContent(content) {
-    console.log(content)
+  async relyContent(content) {
+    const { user } = this.props;
+    const { currentReply } = this.state;
+    const preName = currentReply ? '@' + currentReply.author.loginname + ' ' : ''; // 评论人的名称
+    const params = {
+      accesstoken: user.accesstoken,
+      topicid: this.$router.params.topicid,
+      content: preName + connect,
+      reply_id: currentReply ? currentReply.id : null
+    }
+    const result = await replyContentAction(params);
+    if(result && result.success) {
+      this.getDetail();
+      this.closeReplyContent();
+    }
+  }
+  replyToReply(reply) {
+    this.setState({ currentReply: reply, showReplyContent: true });
   }
   render() {
     const { topicinfo, replies } = this.props;
     const { showReplyContent } = this.state;
     return (
       <View className='detail'>
-        {showReplyContent ? <ReplyContent onCancelReply={this.closeReplyContent.bind(this)} onRely={this.relyContent.bind(this)} /> : null}
+        {showReplyContent ? <ReplyContent onCancelReply={this.closeReplyContent.bind(this)}  onReply={this.relyContent.bind(this)} /> : null}
         <TopicInfo topicinfo={topicinfo} />
-        <Replies replies={replies} onAdmire={this.admire.bind(this)} />
+        <Replies replies={replies} onAdmire={this.admire.bind(this)} onReplyToReply={this.replyToReply.bind(this)} />
         <Button className='reply-btn' onClick={this.Reply.bind(this)}>回复</Button>
       </View>
     )

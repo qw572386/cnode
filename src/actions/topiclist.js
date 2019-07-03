@@ -46,3 +46,13 @@ export const admireTopicAction = (params) => {
     }
   }
 }
+// 话题评论
+export const replyContentAction = async (params) => {
+  const result = await postJson(api.replytopic + params.replyid + '/replies', params)
+  if (result && result.data && result.data.success) {
+    return result.data.data
+  } else {
+    Taro.showToast({title: '评论失败', icon: 'none'})
+  }
+  return false;
+}

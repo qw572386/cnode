@@ -10,6 +10,9 @@ class Replies extends Component{
   admire(repliy) {
     this.props.onAdmire && this.props.onAdmire(repliy)
   }
+  replyToReply(reply) {
+    this.props.onReplyToReply && this.props.onReplyToReply(reply)
+  }
   render() {
     const { replies } = this.props;
     return (
@@ -34,7 +37,7 @@ class Replies extends Component{
                 <View className='topicinfo-repliy-right-zan'>
                   <Image onClick={this.admire.bind(this, item)} className='topicinfo-repliy-image' src={item.is_uped ? require('../../assets/img/myzan.png') : require('../../assets/img/zan.png')} />
                   <Text>{item.ups.length}</Text>
-                  <Image className='topicinfo-repliy-image' src={require('../../assets/img/zhuan.png')} />
+                  <Image onClick={this.replyToReply.bind(this, item)} className='topicinfo-repliy-image' src={require('../../assets/img/zhuan.png')} />
                   <Text>0</Text>
                 </View>
               </View>

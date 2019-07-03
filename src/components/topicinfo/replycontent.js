@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Button, Textarea } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import '.replycontent.less'
+import './replycontent.less'
 
 class ReplyContent extends Component{
   btnCancel() {
@@ -9,7 +9,7 @@ class ReplyContent extends Component{
   }
   btnOk() {
     if (this.state.value) {
-      this.props.onRely && this.props.onRely(this.state.value);
+      this.props.onReply && this.props.onReply(this.state.value);
     } else {
       Taro.showToast({ title: '请输入评论内容', icon: 'none' })
     }
