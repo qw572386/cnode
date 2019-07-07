@@ -31,6 +31,9 @@ class Menu extends Component{
       changeCategory(handleCata)
     }
   }
+  toUser() {
+    Taro.navigateTo({ url: '/pages/login/index' })
+  }
   render() {
     const { currentCata: { value }, showDrawer, showDrawerMenu, hdieDrawerMenu, cataData } = this.props;
     return (
@@ -39,7 +42,7 @@ class Menu extends Component{
       <View className='topiclist-menu'>
         <Image className='image' onClick={showDrawerMenu} src={require('../../assets/img/cata.png')} />
         <Text>{value ? value : ''}</Text>
-        <Image className='image' src={require('../../assets/img/login.png')} />
+        <Image onClick={this.toUser.bind(this)} className='image' src={require('../../assets/img/login.png')} />
       </View>
     </View>
     )
