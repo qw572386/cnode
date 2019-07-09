@@ -29,6 +29,9 @@ class User extends Component{
       })
     })
   }
+  publishTopic() {
+    Taro.navigateTo({url: '/pages/publish/index'})
+  }
   render() {
     const { loginname, avatar_url } = this.props;
     const { recent_topics, recent_replies } = this.state;
@@ -37,6 +40,7 @@ class User extends Component{
         <Head loginname={loginname} avatar_url={avatar_url} />
         <Panel listdata={recent_topics} title='最近的话题' />
         <Panel listdata={recent_replies} title='最近的回复' />
+        <Button className='btn-publish' onClick={this.publishTopic.bind(this)}>发布话题</Button>
       </View>
     )
   }
