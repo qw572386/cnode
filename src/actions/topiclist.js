@@ -56,3 +56,13 @@ export const replyContentAction = async (params) => {
   }
   return false;
 }
+export const submitTopicAction = (params) => {
+  return async () => {
+    const result = await postJson(api.createtopic, params)
+    if (result && result.data && result.data.success) {
+      return result.data
+    } else {
+      throw new Error(result && result.error_msg || '话题发布失败')
+    }
+  }
+}

@@ -6,6 +6,6 @@ const apiObject = {
   getuserinfo: rootPath + '/user/', // 获取用户信息
   createtopic: rootPath + '/topics', // 新建话题
   replytopic: rootPath + '/topic/', // 回复话题消息
-  upreply: rootPath + '/reply/' // 点赞
+  upreply: rootPath + '/reply/', // 点赞
 }
 export default apiObject;
