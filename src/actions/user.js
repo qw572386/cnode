@@ -24,3 +24,14 @@ export const accessTokenAction = (params) => {
     throw new Error(result.data.error_msg || '登录失败');
   }
 }
+export const getUserInfoAction = async (params) => {
+  let result = await getJson(api.getuserinfo + params.loginname);
+  if (result && result.data && result.data.success) {
+    return result.data
+  } else {
+    Taro.showToast({
+      title: '获取用户信息失败',
+      icon: 'none'
+    })
+  }
+}
