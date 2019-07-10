@@ -1,9 +1,17 @@
 import Taro from '@tarojs/taro';
 
 export function getJson(url, data) {
-  return Taro.request({ url, data, method: 'GET' })
+  Taro.showLoading();
+  return Taro.request({ url, data, method: 'GET' }).then(res => {
+    Taro.hideLoading()
+    return res
+  })
 }
 
 export function postJson(url, data) {
-  return Taro.request({ url, data, method: 'POST' })
+  Taro.showLoading();
+  return Taro.request({ url, data, method: 'POST' }).then(res => {
+    Taro.hideLoading()
+    return res
+  })
 }

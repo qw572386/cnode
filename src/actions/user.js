@@ -24,6 +24,7 @@ export const accessTokenAction = (params) => {
     throw new Error(result.data.error_msg || '登录失败');
   }
 }
+// 获取用户信息
 export const getUserInfoAction = async (params) => {
   let result = await getJson(api.getuserinfo + params.loginname);
   if (result && result.data && result.data.success) {
@@ -34,4 +35,12 @@ export const getUserInfoAction = async (params) => {
       icon: 'none'
     })
   }
+}
+// 验证用户信息
+export const validataAction = async (params) => {
+  if (params && params.accesstoken) {
+    return true;
+  }
+  Taro.navigateTo({url: '/pages/login/index'})
+  return false
 }

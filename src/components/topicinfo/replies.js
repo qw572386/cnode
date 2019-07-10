@@ -3,15 +3,26 @@ import { View, Text, Button, Image, RichText } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import './replies.less'
 import timeToLocalFormat from '../../utils/date'
+import { validataAction } from '../../actions/user'
 
 // const isweapp = process.env.TARO_NAV === 'weapp' // 小程序环境
 const isweapp = true // 小程序环境
 class Replies extends Component{
   admire(repliy) {
-    this.props.onAdmire && this.props.onAdmire(repliy)
+    let { user } = this.props;
+    validataAction(user).then(res => {
+      if (res) {
+        this.props.onAdmire && this.props.onAdmire(repliy)
+      }
+    })
   }
   replyToReply(reply) {
-    this.props.onReplyToReply && this.props.onReplyToReply(reply)
+    let { user } = this.props;
+    validataAction(user).then(res => {
+      if (res) {
+        this.props.onReplyToReply && this.props.onReplyToReply(reply)
+      }
+    })
   }
   render() {
     const { replies } = this.props;

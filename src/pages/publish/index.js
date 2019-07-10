@@ -50,10 +50,8 @@ class Publish extends Component{
         accesstoken
       }
       submitTopic && submitTopic(params).then(res => {
-        res && Taro.navigateBack()
+        res && Taro.redirectTo({url: '/pages/user/index'})
       }).catch(error => {
-        console.log('***')
-        console.log(error.message)
         Taro.showToast({title: error.message || '发布话题失败', icon: 'none'})
       })
     } else {
@@ -65,12 +63,12 @@ class Publish extends Component{
     const { selectCata } = this.state;
     return (
       <View className='publish-box'>
+        <Input className='publish-title' onInput={this.titleChange.bind(this)} placeholder='请输入标题' />
+        <Textarea className='publish-content' onInput={this.contentChange.bind(this)} placeholder='请输入内容'></Textarea>
         <Picker onChange={this.changeCata.bind(this)} mode='selector' range={cataData} rangeKey='value'>
-          <View>{selectCata ? selectCata.value : '请选择'}</View>
+          <View  className='publish-cate'>{selectCata ? selectCata.value : '请选择'}</View>
         </Picker>
-        <Input onInput={this.titleChange.bind(this)} placeholder='请输入标题' />
-        <Textarea onInput={this.contentChange.bind(this)} placeholder='请输入内容'></Textarea>
-        <Button onClick={this.submitTopic.bind(this)}>提交</Button>
+        <Button className='publish-btn' onClick={this.submitTopic.bind(this)}>提交</Button>
       </View>
     )
   }

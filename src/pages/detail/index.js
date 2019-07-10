@@ -6,6 +6,7 @@ import Replies from '../../components/topicinfo/replies'
 import TopicInfo from '../../components/topicinfo/topicinfo'
 import ReplyContent from '../../components/topicinfo/replycontent'
 import './index.less'
+import { validataAction } from '../../actions/user'
 
 @connect((store) => {
   return {
@@ -57,7 +58,11 @@ class Detail extends Component{
     }
   }
   Reply() {
-    this.setState({showReplyContent: true});
+    validataAction(this.props.user).then(res => {
+      if (res) {
+        this.setState({showReplyContent: true});
+      }
+    })
   }
   closeReplyContent() {
     this.setState({showReplyContent: false})
@@ -82,13 +87,13 @@ class Detail extends Component{
     this.setState({ currentReply: reply, showReplyContent: true });
   }
   render() {
-    const { topicinfo, replies } = this.props;
+    const { topicinfo, replies, user } = this.props;
     const { showReplyContent } = this.state;
     return (
       <View className='detail'>
         {showReplyContent ? <ReplyContent onCancelReply={this.closeReplyContent.bind(this)}  onReply={this.relyContent.bind(this)} /> : null}
         <TopicInfo topicinfo={topicinfo} />
-        <Replies replies={replies} onAdmire={this.admire.bind(this)} onReplyToReply={this.replyToReply.bind(this)} />
+        <Replies user={user} replies={replies} onAdmire={this.admire.bind(this)} onReplyToReply={this.replyToReply.bind(this)} />
         <Button className='reply-btn' onClick={this.Reply.bind(this)}>回复</Button>
       </View>
     )

@@ -1,14 +1,22 @@
+import { setCache, getCache } from '../utils/cache'
+
+const cacheKey = 'cnode-user-key'
+const user_cache = getCache(cacheKey) || {}; // 读取缓存
 
 const USER_STATE = {
-  accesstoken: 'd5a1e2d3-5b7b-466e-a14d-8522f4041e3d', // 用户密钥
+  ...user_cache
 }
 const user = (preState = USER_STATE, action) => {
   switch(action.type) {
     case 'loginSuccess': {
-      return {...preState, accesstoken: action.accesstoken, loginname: action.loginname, avatar_url: action.avatar_url}
+      const state = {...preState, ...action}
+      setCache(cacheKey, state)
+      return state
     }
     case 'loginFail': {
-      return {...preState, accesstoken: action.accesstoken, loginname: action.loginname, avatar_url: action.avatar_url}
+      const state = {...preState, accesstoken: action.accesstoken, loginname: action.loginname, avatar_url: action.avatar_url}
+      setCache(cacheKey, state)
+      return state
     }
     default: {
       return {...preState}

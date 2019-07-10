@@ -1,12 +1,13 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { showDrawerAction, hideDrawerAction, changeCategoryAction } from '../../actions/menu'
 import { AtDrawer } from 'taro-ui'
+import { showDrawerAction, hideDrawerAction, changeCategoryAction } from '../../actions/menu'
+import { validataAction } from '../../actions/user'
 import './menu.less'
 
 @connect(function(store) {
-  return {...store.menu}
+  return {...store.menu, user: store.user}
 }, dispatch => {
   return {
     showDrawerMenu() {
@@ -32,7 +33,14 @@ class Menu extends Component{
     }
   }
   toUser() {
-    Taro.navigateTo({ url: '/pages/login/index' })
+    const { user } = this.props;
+    validataAction(user).then(result => {
+      if (result) {
+        Taro.navigateTo({ url: '/pages/user/index' })
+      } else {
+        Taro.navigateTo({ url: '/pages/login/index' })
+      }
+    })
   }
   render() {
     const { currentCata: { value }, showDrawer, showDrawerMenu, hdieDrawerMenu, cataData } = this.props;

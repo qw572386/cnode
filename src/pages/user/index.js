@@ -30,7 +30,7 @@ class User extends Component{
     })
   }
   publishTopic() {
-    Taro.navigateTo({url: '/pages/publish/index'})
+    Taro.redirectTo({url: '/pages/publish/index'})
   }
   render() {
     const { loginname, avatar_url } = this.props;
