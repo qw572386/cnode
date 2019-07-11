@@ -1,12 +1,20 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Button, RichText } from '@tarojs/components'
-import { connect } from '@tarojs/redux'
+import { View, Text, RichText, Image } from '@tarojs/components'
 import timeToLocalFormat from '../../utils/date'
 import './topicinfo.less'
 
 class TopicInfo extends Component{
+  getTitle(title){
+    return title;
+  }
+  delTopic(topicinfo) {
+    this.props.onDelTopic && this.props.onDelTopic(topicinfo)
+  }
+  editTopic() {
+    Taro.redirectTo({url: '/pages/publish/index?edit=1'})
+  }
   render() {
-    const { topicinfo: { create_at, title, author: { loginname }, visit_count, content, top, tab } } = this.props;
+    const { topicinfo, topicinfo: { create_at, title, author: { loginname }, visit_count, content, top, tab }, selfPublish } = this.props;
     return (
     <View className='topic-info'>
       <View className='topic-info-header'>
@@ -16,8 +24,14 @@ class TopicInfo extends Component{
         </View>
         <View className='topic-info-header-pie'>
           <Text>{timeToLocalFormat(create_at)}</Text>
-          <Text>{loginname}</Text>
+          <Text>{loginname || ''}</Text>
           <Text>{visit_count + '次浏览'}</Text>
+          {
+            selfPublish ? (<View className='topic-info-header-img'>
+              <Image onClick={this.delTopic.bind(this, topicinfo)} className='img' src={require('../../assets/img/del.png')} />
+              <Image onClick={this.editTopic.bind(this)} className='img' src={require('../../assets/img/edit.png')} />
+            </View>) : null
+          }
         </View>
       </View>
       <View className='topic-info-body'>

@@ -7,5 +7,6 @@ const apiObject = {
   createtopic: rootPath + '/topics', // 新建话题
   replytopic: rootPath + '/topic/', // 回复话题消息
   upreply: rootPath + '/reply/', // 点赞
+  updatetopic: rootPath + '/topics/update', // 更新主题
 }
 export default apiObject;

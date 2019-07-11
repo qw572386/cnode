@@ -2,7 +2,11 @@ const TOPIC_STATE = {
   page: 1,
   limit: 20,
   list: [],
-  topicinfo: {},
+  topicinfo: {
+    author: {
+      loginname: ''
+    }
+  },
   replies: [],
   admireState: false // 点赞状态
 }

@@ -66,3 +66,13 @@ export const submitTopicAction = (params) => {
     }
   }
 }
+export const updateTopicAction = (params) => {
+  return async () => {
+    const result = await postJson(api.updatetopic, params)
+    if (result && result.data && result.data.success) {
+      return result.data
+    } else {
+      throw new Error(result && result.error_msg || '话题更新失败')
+    }
+  }
+}

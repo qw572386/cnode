@@ -89,10 +89,11 @@ class Detail extends Component{
   render() {
     const { topicinfo, replies, user } = this.props;
     const { showReplyContent } = this.state;
+    const selfPublish = user.loginname === topicinfo.author.loginname;
     return (
       <View className='detail'>
         {showReplyContent ? <ReplyContent onCancelReply={this.closeReplyContent.bind(this)}  onReply={this.relyContent.bind(this)} /> : null}
-        <TopicInfo topicinfo={topicinfo} />
+        <TopicInfo selfPublish={selfPublish} topicinfo={topicinfo} />
         <Replies user={user} replies={replies} onAdmire={this.admire.bind(this)} onReplyToReply={this.replyToReply.bind(this)} />
         <Button className='reply-btn' onClick={this.Reply.bind(this)}>回复</Button>
       </View>
