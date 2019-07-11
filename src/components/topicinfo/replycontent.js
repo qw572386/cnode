@@ -24,7 +24,7 @@ class ReplyContent extends Component{
   }
   render() {
     return (
-      <View className='replycontent' onClick={this.bntCancel.bind(this)}>
+      <View className='replycontent' onClick={this.btnCancel.bind(this)}>
         <View className='replycontent-dialog' onClick={this.stopPropagation.bind(this)}>
           <Textarea onInput={this.changeContent.bind(this)} className='reply-textarea' placeholder='请输入回复内容'></Textarea>
           <View className='btn-group'>

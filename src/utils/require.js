@@ -10,7 +10,7 @@ export function getJson(url, data) {
 
 export function postJson(url, data) {
   Taro.showLoading();
-  return Taro.request({ url, data, method: 'POST' }).then(res => {
+  return Taro.request({ url, data, method: 'POST', header: { 'content-type': 'application/json' } }).then(res => {
     Taro.hideLoading()
     return res
   })

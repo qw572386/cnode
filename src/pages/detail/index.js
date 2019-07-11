@@ -74,7 +74,7 @@ class Detail extends Component{
     const params = {
       accesstoken: user.accesstoken,
       topicid: this.$router.params.topicid,
-      content: preName + connect,
+      content: preName + content,
       reply_id: currentReply ? currentReply.id : null
     }
     const result = await replyContentAction(params);
